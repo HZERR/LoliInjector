@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.hzerr.LolilandInjectController">
+   <children>
+      <JFXButton focusTraversable="false" layoutX="204.0" layoutY="409.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onInject" prefHeight="27.0" prefWidth="294.0" styleClass="inject" text="Inject" />
+      <Label layoutX="190.0" layoutY="140.0" text="Folder &quot;Mods&quot;:" />
+      <Separator layoutX="191.0" layoutY="171.0" prefWidth="250.0" />
+      <JFXButton focusTraversable="false" layoutX="372.0" layoutY="135.0" onAction="#onInstallModsFolder" styleClass="install" text="INSTALL" />
+      <Label layoutX="246.0" layoutY="34.0" styleClass="title" text="LoLiInjector By HZERR" />
+      <Label layoutX="190.0" layoutY="187.0" text="Your Folder &quot;Mods&quot;:" />
+      <Separator layoutX="191.0" layoutY="216.0" prefWidth="250.0" />
+      <JFXButton focusTraversable="false" layoutX="372.0" layoutY="182.0" onAction="#onInstallYourModsFolder" styleClass="install" text="INSTALL" />
+      <JFXRadioButton fx:id="addWurst" focusTraversable="false" layoutX="190.0" layoutY="240.0" text="Add ForgeWurst Mod" />
+      <JFXRadioButton fx:id="addCheatingEssentials" focusTraversable="false" layoutX="190.0" layoutY="270.0" text="Add CheatingEssentials Cheat" />
+   </children>
+</AnchorPane>

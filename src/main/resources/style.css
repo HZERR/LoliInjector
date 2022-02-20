@@ -1,0 +1,39 @@
+.root {
+    -fx-background-image: url("/bg.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+}
+
+.label {
+    -fx-font-size: 13px;
+    -fx-text-fill: #6f6f6f;
+    -fx-font-family: Consolas;
+}
+
+.jfx-button {
+    -fx-font-size: 13px;
+    -fx-text-fill: #575555;
+    -fx-font-family: Consolas;
+}
+
+.jfx-radio-button {
+    -fx-font-size: 13px;
+    -jfx-unselected-color: #616161;
+    -jfx-selected-color: #319002;
+    -fx-text-fill: #e5dada;
+    -fx-font-family: Consolas;
+}
+
+.title {
+    -fx-font-size: 18px;
+}
+
+.inject {
+    -jfx-rippler-fill: #00BCD4;
+    -fx-text-fill: #028290;
+}
+
+.install {
+    -jfx-rippler-fill: #2bff00;
+    -fx-text-fill: #319002;
+}

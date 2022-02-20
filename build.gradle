@@ -1,0 +1,49 @@
+buildscript {
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath fileTree(dir: 'lib', include: ['*.jar'])
+    }
+}
+
+plugins {
+    id 'java'
+    id 'idea'
+    id 'com.github.johnrengelman.shadow' version '5.2.0'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation fileTree(dir: 'lib', include: ['*.jar'])
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+shadowJar {
+    archiveBaseName.set('LoliInjector')
+    archiveVersion.set('')
+    archiveClassifier.set('')
+    getDestinationDirectory().set(new File("${projectDir}/build"))
+    manifest(new Action<Manifest>() {
+        @Override
+        void execute(Manifest manifest) {
+            manifest.attributes(new HashMap<String, Object>() {{
+                put("Manifest-Version", "1.0")
+                put("Main-Class", "ru.hzerr.LolilandInjector")
+            }})
+        }
+    })
+}
