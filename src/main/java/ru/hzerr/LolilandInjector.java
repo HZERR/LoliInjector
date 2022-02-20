@@ -24,4 +24,9 @@ public class LolilandInjector extends Application {
     public static void main(String[] args) {
         LolilandInjector.launch(args);
     }
+
+    @Override
+    public void stop() {
+        LolilandInjectController.getInjector().shutdownNow();
+    }
 }

@@ -1,10 +1,12 @@
 package ru.hzerr;
 
 import com.jfoenix.controls.JFXRadioButton;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.DirectoryChooser;
+import org.apache.commons.io.FileUtils;
 import ru.hzerr.file.BaseDirectory;
 import ru.hzerr.file.BaseFile;
 import ru.hzerr.file.HDirectory;
@@ -16,7 +18,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -45,6 +46,8 @@ public class LolilandInjectController {
     private BaseDirectory mods;
     private BaseDirectory yourMods;
     private static final ScheduledExecutorService injector = Executors.newSingleThreadScheduledExecutor();
+    private static final String cheatingEssentials = "https://github.com/HZERR/Cheats/raw/main/CheatingEssentials_v5.1.0a.jar";
+    private static final String wurst = "https://github.com/HZERR/Cheats/raw/main/ForgeWurst-0.11-MC1.12.2.jar";
 
     @FXML
     void onInject(ActionEvent event) {
@@ -53,13 +56,20 @@ public class LolilandInjectController {
             if (yourMods != null) cheats.putAll(yourMods.getFiles()
                     .filter(jar -> jar.getName().endsWith(".jar"))
                     .collect(Collectors.toMap(Function.identity(), jar -> false)));
-            if (addWurst.isSelected()) cheats.put(HFile.from(new File(Objects.requireNonNull(LolilandInjectController.class.getResource("/" + Mods.FORGE_WURST.getName())).toURI())), false);
-            if (addCheatingEssentials.isSelected()) cheats.put(HFile.from(new File(Objects.requireNonNull(LolilandInjector.class.getResource("/" + Mods.CHEATING_ESSENTIALS.getName())).toURI())), false);
+            if (addWurst.isSelected()) {
+                BaseFile wurstFile;
+                FileUtils.copyURLToFile(new URL(wurst), (wurstFile = HFile.createTempFile("ForgeWurst-0.11-MC1.12.2.jar")).asIOFile());
+                cheats.put(wurstFile, false);
+            }
+            if (addCheatingEssentials.isSelected()) {
+                BaseFile cheatingEssentialsFile;
+                FileUtils.copyURLToFile(new URL(cheatingEssentials), (cheatingEssentialsFile = HFile.createTempFile("CheatingEssentials_v5.1.0a.jar")).asIOFile());
+                cheats.put(cheatingEssentialsFile, false);
+            }
             System.out.println("Injector was started");
             injector.scheduleAtFixedRate(() -> {
-                cheats.forEach(new BiConsumer<BaseFile, Boolean>() {
-                    @Override
-                    public void accept(BaseFile baseFile, Boolean aBoolean) {
+                try {
+                    cheats.forEach((baseFile, aBoolean) -> {
                         if (mods.getSubFile(baseFile.getBaseName()).notExists()) {
                             try {
                                 baseFile.copyToDirectory(mods);
@@ -68,12 +78,12 @@ public class LolilandInjectController {
                                 cheats.put(baseFile, true);
                             }
                         }
-                    }
-                });
+                    });
+                } catch (Exception e) { e.printStackTrace(); }
                 if (!cheats.containsValue(false)) {
                     System.out.println("Success!");
                     injector.shutdownNow();
-                    System.exit(0);
+                    Platform.runLater(() -> System.exit(0));
                 }
             }, 0L, 200L, TimeUnit.MILLISECONDS);
         } catch (Exception e) {
@@ -118,5 +128,9 @@ public class LolilandInjectController {
                 addWurst.setSelected(false);
             }
         });
+    }
+
+    public static ScheduledExecutorService getInjector() {
+        return injector;
     }
 }
