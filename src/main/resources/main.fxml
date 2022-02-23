@@ -16,7 +16,7 @@
       <Label layoutX="190.0" layoutY="187.0" text="Your Folder &quot;Mods&quot;:" />
       <Separator layoutX="191.0" layoutY="216.0" prefWidth="250.0" />
       <JFXButton focusTraversable="false" layoutX="372.0" layoutY="182.0" onAction="#onInstallYourModsFolder" styleClass="install" text="INSTALL" />
-      <JFXRadioButton fx:id="addWurst" focusTraversable="false" layoutX="190.0" layoutY="240.0" text="Add ForgeWurst Mod" />
-      <JFXRadioButton fx:id="addCheatingEssentials" focusTraversable="false" layoutX="190.0" layoutY="270.0" text="Add CheatingEssentials Cheat" />
+      <JFXRadioButton fx:id="addWurst" focusTraversable="false" layoutX="190.0" layoutY="240.0" text="Add ForgeWurst 1.12.2 Cheat Mod" />
+      <JFXRadioButton fx:id="addCheatingEssentials" focusTraversable="false" layoutX="190.0" layoutY="270.0" text="Add CheatingEssentials 1.7.10 Cheat Mod" />
    </children>
 </AnchorPane>
