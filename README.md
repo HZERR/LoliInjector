@@ -1,5 +1,5 @@
 # LoliInjector
-### Работоспособность была проверена на Liberika JDK 8
+### Функция AntiBan не реализована 
 <b>Как добавить модицикации в проект?</br></b>
 1. Запустить LoliInjector
 2. Установить Folder "Mods" - папка mods проекта Loliland. У каждого сервера она своя</br>Пример: C:\Users\HZERR\loliland\updates\clients\nano_magic\mods
